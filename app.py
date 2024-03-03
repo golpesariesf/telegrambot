@@ -1,6 +1,6 @@
-from flask import Flask
-from telegram import Update
-from telegram.ext import Updater, CommandHandler, CallbackContext
+from flask import Flask, request
+from telegram import Update, Bot
+from telegram.ext import Updater, CommandHandler, CallbackContext, MessageHandler, Filters
 import requests
 import uuid
 
@@ -9,10 +9,18 @@ NOWPAYMENT_API_KEY = "D37DNS7-VH1MPNS-QGM99PV-SQZQG2A"
 NOWPAYMENT_TID = "2eb7650e-03a0-4202-a3de-f59269ba83d6"
 
 app = Flask(__name__)
+bot = Bot(TOKEN)
+updater = Updater(TOKEN, use_context=True)
 
 @app.route("/")
 def home():
     return "The bot is running!"
+
+@app.route("/webhook", methods=['POST'])
+def handle_webhook():
+    update = Update.de_json(request.get_json(), bot)
+    updater.dispatcher.process_update(update)
+    return "ok"
 
 def start(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(
@@ -36,7 +44,6 @@ def check_payment_status(update: Update, context: CallbackContext) -> None:
         update.message.reply_text("پرداخت هنوز کامل نشده است. لطفاً بعداً مجدداً تلاش کنید.")
 
 def start_bot() -> None:
-    updater = Updater(TOKEN)
     dp = updater.dispatcher
 
     dp.add_handler(CommandHandler("start", start))
