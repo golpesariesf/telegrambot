@@ -1,4 +1,4 @@
-﻿from telegram import Update
+from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext
 import requests
 import uuid
@@ -28,7 +28,7 @@ def check_payment_status(update: Update, context: CallbackContext) -> None:
     else:
         update.message.reply_text("پرداخت هنوز کامل نشده است. لطفاً بعداً مجدداً تلاش کنید.")
 
-def main() -> None:
+def start_bot() -> None:
     updater = Updater(TOKEN)
     dp = updater.dispatcher
 
@@ -39,4 +39,4 @@ def main() -> None:
     updater.idle()
 
 if __name__ == '__main__':
-    main()
+    start_bot()
