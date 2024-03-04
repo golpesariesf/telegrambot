@@ -1,4 +1,8 @@
 Flask
 python-telegram-bot
 requests
+<<<<<<< HEAD
 gunicorn
+=======
+gunicorn
+>>>>>>> fbed71eb8c70a17070e7642b1bf098b466813868

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿from flask import Flask, request
+=======
+from flask import Flask, request
+>>>>>>> fbed71eb8c70a17070e7642b1bf098b466813868
 from telegram import Update, Bot
 from telegram.ext import Updater, CommandHandler, CallbackContext, MessageHandler
 import requests
@@ -53,4 +57,8 @@ def start_bot() -> None:
     updater.idle()
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     start_bot()
+=======
+    start_bot()
+>>>>>>> fbed71eb8c70a17070e7642b1bf098b466813868
